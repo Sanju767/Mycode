@@ -60,7 +60,11 @@ if selected_category == "All Categories":
 elif selected_product == "All Products":
     # Aggregate across all products in this category
     st.write(f"Showing sum of all products in category: {selected_category}")
+
+
 else:
     # Filter to specific product
-    st.write(f"Showing metrics for: {selected_product} in category {selected_category}")
-    
+    st.write(f"Showing metrics for: {selected_product} in category {selected_st.markdown(
+    "<h5 style='text-align: left; color: black;'>HSBC Mexico GP analysis R&L file</h5>",
+    unsafe_allow_html=True
+)
