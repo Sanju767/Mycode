@@ -44,3 +44,10 @@ proc sql;
     where a.flag_active_inactive = 1
       and calculated segment_category in ('Premier','Advance','Personal Banking');
 quit;
+
+
+# Ensure 'Segment' column keeps your defined order
+segment_order = ['Premier', 'Advance', 'Personal Banking', 'GPB', 'RBB', 'Other']
+segment_line['Segment'] = pd.Categorical(segment_line['Segment'], 
+                                         categories=segment_order, 
+                                         ordered=True)
