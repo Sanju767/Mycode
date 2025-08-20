@@ -79,3 +79,66 @@ color_map = {
     "Debit Cards": "#9edae5",        # Aqua
     "Investment Repo": "#dbdb8
 
+
+
+
+    
+
+
+
+
+
+
+import streamlit as st
+import plotly.express as px
+import pandas as pd
+
+# Fixed color mapping for your products
+color_map = {
+    "Credit Cards": "#1f77b4",       # Blue
+    "Payroll Loans": "#ff7f0e",      # Orange
+    "Personal Loans": "#2ca02c",     # Green
+    "Mortgages": "#d62728",          # Red
+    "Auto Loans": "#9467bd",         # Purple
+    "Kavak": "#8c564b",              # Brown
+    "Installment": "#e377c2",        # Pink
+    "Lombard Lending": "#7f7f7f",    # Gray
+    "Revolving": "#bcbd22",          # Olive
+    "CSI": "#17becf",                # Cyan
+    "Real Estate Ban": "#ff9896",    # Light Red
+    "Time Deposits": "#c5b0d5",      # Lavender
+    "Demand Deposits": "#98df8a",    # Light Green
+    "Savings": "#aec7e8",            # Light Blue
+    "Investment DPM": "#ffbb78",     # Light Orange
+    "Investment Fund": "#f7b6d2",    # Rose
+    "Structured Note": "#c49c94",    # Beige
+    "Debit Cards": "#9edae5",        # Aqua
+    "Investment Repo": "#dbdb8d",    # Light Olive
+    "Capitales": "#393b79",          # Dark Blue
+    "Custody": "#637939",            # Dark Green
+    "Insurance": "#8c6d31",          # Dark Brown
+    "Insurance Auto": "#843c39",     # Dark Red
+    "Insurance Morg": "#7b4173",     # Dark Purple
+    "Trading": "#5254a3"             # Indigo
+}
+
+# Example dataset
+df = pd.DataFrame({
+    "Product": ["Credit Cards", "Payroll Loans", "Personal Loans", "Trading"],
+    "Value": [120, 80, 150, 200]
+})
+
+# Plot with consistent colors
+fig = px.bar(
+    df,
+    x="Value",
+    y="Product",
+    orientation="h",
+    color="Product",
+    color_discrete_map=color_map
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
+
+
