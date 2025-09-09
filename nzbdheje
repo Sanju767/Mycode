@@ -1,0 +1,16 @@
+['ID_DATE','VINTAGE','AGE_OF_CUSTOMER','INTERNATIONALLY_FLAG',
+ 'PRIMARY_BANK_FLAG','DIGITALLY_ENGAGED','ID_SEG_LOC','Month']
+join_cols = ['ID_DATE','VINTAGE','AGE_OF_CUSTOMER','INTERNATIONALLY_FLAG',
+             'PRIMARY_BANK_FLAG','DIGITALLY_ENGAGED','ID_SEG_LOC','Month']
+
+for col in join_cols:
+    if col in prod_merged.columns:
+        prod_merged[col] = prod_merged[col].astype(str)
+    if col in expense_merged.columns:
+        expense_merged[col] = expense_merged[col].astype(str)
+final_merged45 = pd.merge(
+    prod_merged,
+    expense_merged,
+    how="left",
+    on=join_cols
+)
