@@ -139,6 +139,22 @@ fig = px.bar(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+data expense_new1;
+    set expense_202403;
 
+    /* ---- Update VINTAGE classification ---- */
+    if VINTAGE in ('0M-1M', '02M-12M') then VINTAGE = '0-12M';
+
+    /* ---- Update PORTA_FLAG ---- */
+    if PORTA_FLAG = 'NA' then PORTA_FLAG = 'Active';
+    else if PORTA_FLAG = 'Porta Out' then PORTA_FLAG = 'porta out';
+    else if PORTA_FLAG = 'Porta In' then PORTA_FLAG = 'porta in';
+    else if PORTA_FLAG = '.' then PORTA_FLAG = 'No Porta';
+
+    /* ---- Update flag_Payroll ---- */
+    if flag_Payroll = 'EX Payroll' then flag_Payroll = 'Ex-Payroll';
+    else if flag_Payroll = 'NO Payroll' then flag_Payroll = 'Non-Payroll';
+
+run;
 
 
