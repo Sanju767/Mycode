@@ -1,0 +1,37 @@
+for seg in segments:
+    seg_df = filtered_df[filtered_df['Segment_Category'] == seg]
+
+    # safely get customer count for that segment
+    cust_count = int(cust_segment_data.get(seg, 0))
+    if cust_count == 0:
+        avg_balance = 0
+        revenue = 0
+        expense = 0
+        continue
+
+    # ---- Average Balances ----
+    loans = seg_df.loc[seg_df['Product_Category'] == 'Loans', 'PERFORMING_AVG_BALANCE'].sum()
+    deposits = seg_df.loc[seg_df['Product_Category'] == 'Deposits', 'PERFORMING_AVG_BALANCE'].sum()
+    investment = seg_df.loc[seg_df['Product_Category'] == 'Investment', 'PERFORMING_AVG_BALANCE'].sum()
+    other = seg_df.loc[seg_df['Product_Category'] == 'Other', 'PERFORMING_AVG_BALANCE'].sum()
+
+    total_balance = loans + deposits + investment + other
+
+    # ✅ Average Balance per customer (scaled to crore if needed)
+    avg_balance = (total_balance / cust_count) / 1e7  # divide by 1 crore if you want value in Cr
+
+    # ---- Revenue ----
+    total_revenue = seg_df['Total_Revenue'].sum()
+    revenue = (total_revenue / cust_count) / 1e5  # adjust scale as per your dashboard unit
+
+    # ---- Expenses ----
+    seg_exp_df = filtered_df_expense[filtered_df_expense['Segment_Category'] == seg]
+    total_expense = seg_exp_df['AMOUNT'].sum()
+    expense = (total_expense / cust_count) / 1e5
+
+    # Round off
+    avg_balance = round(avg_balance, 2)
+    revenue = round(revenue, 2)
+    expense = round(expense, 2)
+
+    print(f"{seg}: Avg Bal={avg_balance}, Revenue={revenue}, Expense={expense}")
